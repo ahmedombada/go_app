@@ -29,7 +29,7 @@ node {
 
     stage('Build App') {
         
-        sh "go build go.app"
+        sh "go build app.go"
         
     }
 }
