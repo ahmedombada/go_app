@@ -50,6 +50,12 @@ node {
         
     }
 
+    stage('Init App') {
+        
+        sh "go mod tidy"
+        
+    }
+
     stage('Test App') {
         
         sh "go test"
