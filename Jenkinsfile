@@ -11,27 +11,27 @@ node {
 
     stage('Init App') {
         
-        sh "go init mod"
+        sh "go mod init go-build"
         
     }
 
-    // stage('Test App') {
+    stage('Init App') {
         
-    //     sh "go test"
+        sh "go mod tidy"
         
-    // }
+    }
+    
+    stage('Test App') {
+        
+        sh "go test"
+        
+    }
 
-    // stage('Test App') {
+    stage('Build App') {
         
-    //     sh "go test"
+        sh "go build go.app"
         
-    // }
-
-    // stage('Build App') {
-        
-    //     sh "go test"
-        
-    // }
+    }
 }
 
 // node {
