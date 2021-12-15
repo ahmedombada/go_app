@@ -44,6 +44,12 @@ node {
         checkout scm
     }
 
+    stage('Init App') {
+        
+        sh "go mod init go-build"
+        
+    }
+
     stage('Test App') {
         
         sh "go test"
