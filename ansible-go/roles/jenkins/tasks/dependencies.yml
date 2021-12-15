@@ -1,0 +1,8 @@
+- name: Install dependencies
+  apt: name={{ packages }} state=present
+  vars:
+    packages:
+      - openjdk-8-jdk 
+      - openjdk-8-jre 
+      - gcc
+      - ansible
