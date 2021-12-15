@@ -64,6 +64,12 @@
 //             } 
 //                 echo "Trying to Push my own docker registry"
 //     }
+
+//     stage('deploy image') {
+
+//         app = docker.build("fromjenkins")
+//     }
+
 // }
 
 // with ansible
@@ -71,13 +77,18 @@
 node {
     def app
 
+        stage('Clone repository') {
+        /* Cloning the Repository to our Workspace */
+
+        checkout scm
+    }
+
 
     stage('Test App') {
         
         sh '''
-          ansible --version
-          ansible-playbook --version
-          ansible-galaxy --version
+          ansible-go/./run_playbook -t deploy-app --check
+          
         '''        
     }
     
