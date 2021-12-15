@@ -71,7 +71,7 @@ node {
     stage('run image') {
         /* This runs image */
 
-        app = docker.build("fromjenkins")
+        sh "docker run -d -p 8088:8080 registry.ombada.tech:5000/fromjenkins"
     }
 
     stage('Push image') {
