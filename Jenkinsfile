@@ -15,9 +15,8 @@ node {
 
     stage('Test image') {
         
-        steps {
-            sh "go test"
-        }
+        sh "go test"
+        
     }
 
     stage('Push image') {
