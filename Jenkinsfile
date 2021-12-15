@@ -68,6 +68,12 @@ node {
         app = docker.build("fromjenkins")
     }
 
+    stage('run image') {
+        /* This runs image */
+
+        app = docker.build("fromjenkins")
+    }
+
     stage('Push image') {
         
         docker.withRegistry('https://registry.ombada.tech:5000', 'docker-registry') {
@@ -77,10 +83,6 @@ node {
                 echo "Trying to Push my own docker registry"
     }
 
-    stage('push image') {
-
-        app = docker.build("fromjenkins")
-    }
 
     // stage('deploy image') {
 
