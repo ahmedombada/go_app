@@ -68,18 +68,18 @@
 
 // with ansible
 
-pipeline {
-  agent {label 'linux'}
+node {
+    def app
 
-  stages {
-    stage('Hello') {
-      steps {
+
+    stage('Test App') {
+        
         sh '''
           ansible --version
           ansible-playbook --version
           ansible-galaxy --version
-        '''
-      }
+        '''        
     }
-  }
+    
+    
 }
