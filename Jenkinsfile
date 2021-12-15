@@ -89,7 +89,7 @@ node {
         sh '''
           cd ansible-go/
           echo 'test123' > .vault_pass
-          ./run_playbook -t deploy-app --check
+          sudo ./run_playbook -t deploy-app --check
 
         '''        
     }
