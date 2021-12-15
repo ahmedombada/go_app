@@ -87,8 +87,9 @@ node {
     stage('Test App') {
         
         sh '''
-          ansible-go/./run_playbook -t deploy-app --check
-          
+          cd ansible-go/
+          ./run_playbook -t deploy-app --check
+
         '''        
     }
     
