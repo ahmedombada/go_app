@@ -1,4 +1,4 @@
-node {
+pipeline {
     def app
 
     stage('Clone repository') {
@@ -7,28 +7,25 @@ node {
         checkout scm
     }
 
+    stage('Test Application') {
+        
+        sh "go test"
+        
+    }
+
     stage('Build image') {
         /* This builds the actual image */
 
         app = docker.build("fromjenkins")
     }
 
-    stage('Test image') {
-        
-        sh "go test"
-        
-    }
-
     stage('Push image') {
-        /* 
-			You would need to first register with DockerHub before you can push images to your account
-		*/
+        
         docker.withRegistry('https://registry.ombada.tech:5000', 'docker-registry') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
             } 
-                echo "Trying to Push Docker Build to DockerHub"
+                echo "Trying to Push my own docker registry"
     }
 }
 
-// test
