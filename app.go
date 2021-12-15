@@ -40,7 +40,6 @@ func main() {
 	fmt.Println("Server started")
 	http.HandleFunc("/", handler)
 	http.Handle("/metrics", promhttp.Handler())
-	// http.ListenAndServe(":2112", nil)
 	fmt.Println("Monitoring endpoint added")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

@@ -1,39 +1,40 @@
 
+// I dont think this is ideal
+// node {
+//     def app
 
-node {
-    def app
+//     stage('Clone repository') {
+//         /* Cloning the Repository to our Workspace */
 
-    stage('Clone repository') {
-        /* Cloning the Repository to our Workspace */
+//         checkout scm
+//     }
 
-        checkout scm
-    }
-
-    stage('Init App') {
+//     stage('Init App') {
         
-        sh "go mod init go-build"
+//         sh "go mod init go-build"
         
-    }
+//     }
 
-    stage('Init App') {
+//     stage('Init App') {
         
-        sh "go mod tidy"
+//         sh "go mod tidy"
         
-    }
+//     }
     
-    stage('Test App') {
+//     stage('Test App') {
         
-        sh "go test"
+//         sh "go test"
         
-    }
+//     }
 
-    stage('Build App') {
+//     stage('Build App') {
         
-        sh "go build app.go"
+//         sh "go build app.go"
         
-    }
-}
-// 12
+//     }
+// }
+
+// This is how you build a docker image and push it, here im using my own docker registery
 // node {
 //     def app
 
@@ -65,3 +66,20 @@ node {
 //     }
 // }
 
+// with ansible
+
+pipeline {
+  agent {label 'linux'}
+
+  stages {
+    stage('Hello') {
+      steps {
+        sh '''
+          ansible --version
+          ansible-playbook --version
+          ansible-galaxy --version
+        '''
+      }
+    }
+  }
+}
