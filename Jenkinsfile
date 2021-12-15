@@ -13,12 +13,12 @@ node {
         app = docker.build("fromjenkins")
     }
 
-    // stage('Test image') {
+    stage('Test image') {
         
-    //     app.inside {
-    //         sh "go test"
-    //     }
-    // }
+        steps {
+            sh "go test"
+        }
+    }
 
     stage('Push image') {
         /* 
