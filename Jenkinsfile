@@ -37,7 +37,11 @@
 // This is how you build a docker image and push it, here im using my own docker registery
 node {
     def app
-
+    cleanWs()
+    stage('Stop ALL running containers') {
+        sh "docker stop $(docker ps -aq)"
+    }
+    
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
 
@@ -82,9 +86,6 @@ node {
 
         sh "docker run -d -p 8088:8080 registry.ombada.tech:5000/test-jenkins-go"
     }
-
-    
-
 }
 
 // with ansible
