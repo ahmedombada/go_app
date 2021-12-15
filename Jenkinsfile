@@ -1,4 +1,4 @@
-pipeline {
+node {
     def app
 
     stage('Clone repository') {
@@ -7,12 +7,12 @@ pipeline {
         checkout scm
     }
 
-    stage('Test Application') {
+    stage('Test App') {
         
         sh "go test"
         
     }
-
+    
     stage('Build image') {
         /* This builds the actual image */
 
