@@ -68,12 +68,6 @@ node {
         app = docker.build("test-jenkins-go")
     }
 
-    stage('run image') {
-        /* This runs image */
-
-        sh "docker run -d -p 8088:8080 registry.ombada.tech:5000/test-jenkins-go"
-    }
-
     stage('Push image') {
         
         docker.withRegistry('https://registry.ombada.tech:5000', 'docker-registry') {
@@ -82,6 +76,14 @@ node {
             } 
                 echo "Trying to Push my own docker registry"
     }
+
+    stage('run image') {
+        /* This runs image */
+
+        sh "docker run -d -p 8088:8080 registry.ombada.tech:5000/test-jenkins-go"
+    }
+
+    
 
 }
 
