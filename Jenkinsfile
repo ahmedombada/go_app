@@ -1,23 +1,33 @@
-pipeline {
-    agent any
+node {
+    def app
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-                sh 'go mod init'
-                
-            }
+    stage('Clone repository') {
+        /* Cloning the Repository to our Workspace */
+
+        checkout scm
+    }
+
+    stage('Build image') {
+        /* This builds the actual image */
+
+        app = docker.build("fromjenkins")
+    }
+
+    stage('Test image') {
+        
+        app.inside {
+            sh "go test"
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+    }
+
+    stage('Push image') {
+        /* 
+			You would need to first register with DockerHub before you can push images to your account
+		*/
+        docker.withRegistry('https://registry.ombada.tech:5000', 'docker-registry') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+            } 
+                echo "Trying to Push Docker Build to DockerHub"
     }
 }
