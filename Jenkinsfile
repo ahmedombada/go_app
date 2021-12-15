@@ -16,7 +16,7 @@ node {
     stage('Test image') {
         
         app.inside {
-            sh "go test"
+            sh "GOCACHE=off go test"
         }
     }
 
