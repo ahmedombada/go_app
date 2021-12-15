@@ -38,10 +38,11 @@
 node {
     def app
     cleanWs()
-    stage('Stop ALL running containers') {
-        sh "docker stop $(docker ps -aq)"
-    }
     
+    stage('Stop ALL running containers') {
+        sh "docker stop \$(docker ps -aq)"
+    }
+
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
 
