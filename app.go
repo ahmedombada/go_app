@@ -22,7 +22,7 @@ var counter = promauto.NewCounter(prometheus.CounterOpts{
 })
 
 func SimpleFactory (host string) Simple {
-	return Simple{"Hello there this is a pipeline", "World", host}
+	return Simple{"Hello there this is a pipeline redundant", "World", host}
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
