@@ -87,6 +87,10 @@ node {
 
         sh "docker run -d -p 8088:8080 registry.ombada.tech:5000/test-jenkins-go"
     }
+
+    stage('update image on remote server') {
+        ansiblePlaybook(credentialsId: 'svc-ssh', inventory: 'hosts', playbook: 'main.yml')
+    }
 }
 
 // with ansible

@@ -1,0 +1,2 @@
+[second_instance]
+172.31.32.36    ansible_user=svcjenkins
