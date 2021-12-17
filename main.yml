@@ -21,3 +21,36 @@
         - "8088:8080"
     tags:
       - redeploy
+
+  - name: make sure packages exists
+    package:
+      name: "{{item}}"
+      state: present
+    with_items:
+      - nginx
+
+  - name: copy config files 
+    ansible.builtin.template:
+      src: server-config.j2
+      dest: /etc/nginx/sites-available/default.conf
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: create sym links
+    file:
+      src: /etc/nginx/sites-available/default.conf
+      dest: /etc/nginx/sites-enabled/default.conf
+      owner: root
+      group: root
+      state: link
+
+  - name: force systemd to reread configs
+    ansible.builtin.systemd:
+      daemon_reload: yes
+
+  - name: enable nginx 
+    shell: "systemctl enable nginx" 
+
+  - name: start nginx 
+    shell: "systemctl start nginx"
