@@ -89,7 +89,7 @@ node {
     }
 
     stage('update image on remote server') {
-        // This deploys the image to a second server 
+        // This deploys the image to a second server // 
         ansiblePlaybook(credentialsId: 'svc-ssh', inventory: 'hosts', playbook: 'main.yml', disableHostKeyChecking: 'true')
     }
 }
