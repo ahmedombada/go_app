@@ -89,7 +89,7 @@ node {
     }
 
     stage('update image on remote server') {
-        ansiblePlaybook(credentialsId: 'svc-ssh', inventory: 'hosts', playbook: 'main.yml')
+        ansiblePlaybook(credentialsId: 'svc-ssh', inventory: 'hosts', playbook: 'main.yml', disableHostKeyChecking: 'true')
     }
 }
 
