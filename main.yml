@@ -1,7 +1,18 @@
 ---
 - hosts: 172.31.32.36
   tasks:
+  
+- name: Install dependencies
+  apt: name={{ packages }} state=present
+  vars:
+    packages:
+      - python3-pip
 
+- name: Install docker-py
+  pip:
+    name: docker-py
+    executable: pip3
+    
   - name: Log into private regis
     docker_login:
       registry: registry.ombada.tech:5000
