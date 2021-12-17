@@ -1,0 +1,22 @@
+---
+- hosts: 172.31.32.36
+  tasks:
+
+  - name: Log into private regis
+    docker_login:
+      registry: registry.ombada.tech:5000
+      username: docker-user
+      password: Brezn4ME!
+      reauthorize: yes
+
+  - name: Create website container
+    docker_container:
+      name: test-website
+      image: registry.ombada.tech:5000/test-jenkins-go
+      pull: yes
+      restart_policy: always
+      hostname: test-website
+      ports:
+        - "8088:8080"
+    tags:
+      - redeploy
